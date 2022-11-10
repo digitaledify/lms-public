@@ -7,7 +7,6 @@ import moduleRouter from "./modules/module.router";
 import { archiveCourseHandler } from "./archieve-course-handler";
 import { updateCourseHandler } from "./update-course.handler";
 import { updateLiveLinkHandler } from "./update-live-link.handler";
-import { unenrollStudentHandler } from "./unenroll-student.handler";
 
 const coursesRouter = Router();
 
@@ -19,8 +18,6 @@ coursesRouter
   .route("/:courseId")
   .get(getCourseHandler)
   .put(updateCourseHandler);
-
-coursesRouter.delete("/:courseId/enrolled/:studentId", unenrollStudentHandler);
 
 coursesRouter.patch("/:courseId/archieved", archiveCourseHandler);
 

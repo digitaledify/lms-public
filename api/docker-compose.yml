@@ -8,24 +8,15 @@ services:
       - POSTGRES_DB=mydb
     ports:
       - "5432:5432"
-    
+
   api-server:
-    image: lms-api-server
+    image: lms-public-api
+    build: .
     environment:
       - MODE=local
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:itjustworks@localhost:5432/mydb
-      - AUTH0_DOMAIN=local-env-lms.us.auth0.com
-      - AUTH0_API_AUDIENCE=http://localhost:8080
-      - AUTH0_API_APP_RESOURCE_ID=635f6107d0ec2a0f57c3604d
-      - AUTH0_API_APP_IDENTIFIER=http://localhost:8080
-      - AUTH0_MGMT_CLIENT_ID=swOOq46KTdkW9qCdqm6bUNq8kXyBADXh
-      - AUTH0_MGMT_CLIENT_SECRET=AXeIG3ftLvtrqSAU9aKCiundFjFxbr9xE4ulysiD2Bo3Tfz9TxQKouWdGice0Ij8
-      - AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=prodlms;AccountKey=Ibqo8keCPYSRHGFz/anpKstRGrnS6HqQlPp6fmaN2rsCuNV7A9V7WcVBkIKgMLnzi6/qMTzWBzoi+AStZRX+2g==;EndpointSuffix=core.windows.net
-
+      - DATABASE_URL=postgresql://postgres:itjustworks@local-db:5432/mydb
     ports:
       - "8080:8080"
-
     depends_on:
       - local-db
-
