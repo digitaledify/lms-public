@@ -8,6 +8,10 @@ services:
       - POSTGRES_DB=mydb
     ports:
       - "5432:5432"
+    # volumes: # uncomment to persist data using bind mount
+    # - ./data:/var/lib/postgresql/data
+    # volumes: # uncomment to persist data using named volume
+    #   - local-db-data:/var/lib/postgresql/data
 
   api-server:
     image: lms-public-api
@@ -18,6 +22,7 @@ services:
       - DATABASE_URL=postgresql://postgres:itjustworks@local-db:5432/mydb
     ports:
       - "8080:8080"
+    restart: on-failure
     depends_on:
       - local-db
 
@@ -31,3 +36,5 @@ services:
       - "80:80"
     depends_on:
       - api-server
+# volumes:
+#   local-db-data: # uncomment to persist data using named volume
