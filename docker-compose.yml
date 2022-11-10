@@ -1,0 +1,33 @@
+# Docker compose start container with env variables
+services:
+  local-db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=itjustworks
+      - POSTGRES_DB=mydb
+    ports:
+      - "5432:5432"
+
+  api-server:
+    image: lms-public-api
+    build: api/
+    environment:
+      - MODE=local
+      - PORT=8080
+      - DATABASE_URL=postgresql://postgres:itjustworks@local-db:5432/mydb
+    ports:
+      - "8080:8080"
+    depends_on:
+      - local-db
+
+  web-server:
+    image: lms-web
+    build: webapp/
+    environment:
+      - MODE=local
+      - API_URL=http://api-server:8080
+    ports:
+      - "80:80"
+    depends_on:
+      - api-server
