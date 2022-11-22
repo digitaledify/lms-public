@@ -23,3 +23,15 @@ spec:
           env:
             - name: PORT
               value: "3000"
+            - name: MODE
+              value: production
+            - name: DB_HOST
+              value: postgres-cluster-ip-service
+            - name: DB_PORT
+              value: 5432
+            - name: DB_USER
+              value: postgres
+            - name: DB_NAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: password

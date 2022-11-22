@@ -28,13 +28,5 @@ spec:
               mountPath: /var/lib/postgresql/data
               subPath: postgres
           env:
-            - name: DB_HOST
-              value: postgres-cluster-ip-service
-            - name: DB_PORT
-              value: 5432
-            - name: DB_USER
-              value: postgres
-            - name: DB_NAME
-              value: postgres
-            - name: DB_PASSWORD
+            - name: POSTGRES_PASSWORD
               value: password
