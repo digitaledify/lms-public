@@ -18,8 +18,6 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 3000
-
-          # these are the environment variables
           env:
             - name: PORT
               value: "3000"
