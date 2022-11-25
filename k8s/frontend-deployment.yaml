@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: frontend
+  template:
+    metadata:
+      labels:
+        component: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: lms-web
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODE
+              value: production
+            - name: VITE_API_URL
+              value: api-load-balancer-service
