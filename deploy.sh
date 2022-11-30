@@ -8,6 +8,6 @@ if curl http://localhost; then
   docker compose down
 fi
 
-docker-compose build --no-cache
+docker compose up -d --build "api-server" "web-server"
 
 echo "Deployment done!"
