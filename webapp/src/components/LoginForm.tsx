@@ -1,11 +1,33 @@
 import loginFormJpg from "../assets/login-page-hero.jpg";
 import logoSrc from "../assets/logo.png";
 
-type LoginFormComponentProps = {
-  register?: boolean
-}
+import { useState } from "react";
+import axios from "axios";
+import { Link } from "@tanstack/react-location";
 
-function LoginFormComponent({register}:LoginFormComponentProps) {
+const baseURL = "https://lms-public.onrender.com/api/auth";
+
+function LoginForm() {
+ 
+  const [user, setUser] = useState({ username: "", password: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(baseURL + "/login", { ...user });
+
+      console.log(response.data);
+      setUser({ username: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="min-h-screen ">
       <div className="flex flex-col lg:flex-row-reverse">
@@ -30,51 +52,40 @@ function LoginFormComponent({register}:LoginFormComponentProps) {
                 <span className="label-text">Username</span>
               </label>
               <input
+                name="username"
                 type="text"
                 placeholder="username"
                 className="input input-bordered"
+                value={user.username}
+                onChange={handleChange}
               />
             </div>
-            {register && (
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="name"
-                  className="input input-bordered"
-                />
-              </div>
-            )}
 
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                name="password"
+                type="password"
                 placeholder="password"
                 className="input input-bordered"
+                value={user.password}
+                onChange={handleChange}
               />
             </div>
-            {register ? (
-              <div className="form-control mt-6">
-                <button className="btn btn-primary ">Register</button>
-              </div>
-            ) : (
-              <div className="form-control mt-6">
-                <button className="btn btn-primary ">Login</button>
-              </div>
-            )}
-            {!register && (
-              <p className="mt-6 text-center">
-                Don&apos;t have an account?{" "}
-                <span className=" font-semibold underline">
-                  <a href="#">Register</a>
-                </span>
-              </p>
-            )}
+
+            <div className="form-control mt-6">
+              <button className="btn btn-primary" onClick={handleLogin}>
+                Login
+              </button>
+            </div>
+            <p className="mt-6 text-center">
+              Don&apos;t have an account?{" "}
+              <span className=" font-semibold underline">
+                <Link to='/signup'>Register</Link>
+              </span>
+            </p>
           </div>
         </div>
       </div>
@@ -82,4 +93,4 @@ function LoginFormComponent({register}:LoginFormComponentProps) {
   );
 }
 
-export default LoginFormComponent;
+export default LoginForm;

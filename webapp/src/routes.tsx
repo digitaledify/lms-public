@@ -8,6 +8,8 @@ import CreateCourse from "./pages/create-course";
 import Dashboard from "./pages/dashboard";
 import ManageCourse from "./pages/ManageCourse";
 import ManageCourses from "./pages/ManageCourses";
+import Login from "./components/LoginForm";
+import SignUp from "./components/SignUp";
 
 export type LocationGenerics = MakeGenerics<{
   LoaderData: {
@@ -29,6 +31,14 @@ export const routes: Route<LocationGenerics>[] = [
         (await queryClient.fetchQuery(["getCourses"], () => getCourses()))
       );
     },
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "admin",
