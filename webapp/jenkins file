@@ -6,7 +6,7 @@ pipeline {
                 echo 'Building..'
                 sh 'cd webapp && npm install'
                 sh 'cd webapp && npm run build'
-                sh 'scp -r webapp/dist ubuntu@172.31.1.224:~'
+                sh 'scp -r webapp/dist ubuntu@34.215.214.105:~'
                 sh 'ls'
             }
         }
