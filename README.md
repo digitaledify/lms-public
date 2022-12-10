@@ -1,2 +1,2 @@
 # Digital Lync LMS
-.
+
