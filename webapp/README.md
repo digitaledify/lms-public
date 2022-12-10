@@ -20,4 +20,4 @@
 - Serve generated `dist/` folder with a production web server
 
 _View the deployment resource in azure cloud portal at [here.](https://portal.azure.com/#@mkonakonamars.onmicrosoft.com/resource/subscriptions/d5f3450e-23c9-47f0-a07c-f650dee64c3c/resourcegroups/javascript-stack/providers/Microsoft.Web/staticSites/konamars/staticsite)_
-
+.
