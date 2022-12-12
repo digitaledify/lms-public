@@ -11,6 +11,7 @@ type MainLayoutProps = {
 function MainLayout(props: MainLayoutProps) {
   const router = useRouter();
   const location = useLocation();
+  
 
   return (
     <div>
