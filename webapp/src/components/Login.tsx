@@ -1,12 +1,13 @@
-import loginFormJpg from "../assets/login-page-hero.jpg";
+import loginJpg from "../assets/login-page-hero.jpg";
 import logoSrc from "../assets/logo.png";
+import { toast } from "react-toastify";
 
 import { useState } from "react";
 import { Link, Navigate } from "@tanstack/react-location";
 import axiosInstance from "../lib/http-client";
 import useAuth from "../hooks/useAuth";
 
-function LoginForm() {
+function Login() {
   const [user, setUser] = useState({ username: "", password: "" });
   const auth = useAuth();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +21,7 @@ function LoginForm() {
     try {
       const response = await axiosInstance.post("/auth/login", { ...user });
       auth.login(response.data.token, response.data.user);
+    toast("Successfully logged In!", { type: "success" });
 
       console.log(response.data);
       setUser({ username: "", password: "" });
@@ -35,7 +37,7 @@ function LoginForm() {
       <div className="flex flex-col lg:flex-row-reverse">
         <div className="w-full lg:max-w-[50%]">
           <img
-            src={loginFormJpg}
+            src={loginJpg}
             alt="Person working"
             className="w-full lg:min-h-[100vh]"
           />
@@ -95,4 +97,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default Login;

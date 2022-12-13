@@ -1,9 +1,10 @@
 import { useState } from "react";
-import loginFormJpg from "../assets/login-page-hero.jpg";
+import loginJpg from "../assets/login-page-hero.jpg";
 import logoSrc from "../assets/logo.png";
 import { Link } from "@tanstack/react-location";
 import axiosInstance from "../lib/http-client";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth"; 
+import { toast } from "react-toastify";
 
 function SignUp() {
   const auth = useAuth();
@@ -20,6 +21,7 @@ function SignUp() {
     try {
       const response = await axiosInstance.post("/auth/register", { ...user });
       auth.login(response.data.token, response.data.user);
+      toast('Successfully Registered!',{type:'success'})
       console.log(response.data);
       setUser({ username: "", name: "", password: "" });
     } catch (error) {
@@ -32,7 +34,7 @@ function SignUp() {
       <div className="flex flex-col lg:flex-row-reverse">
         <div className="w-full lg:max-w-[50%]">
           <img
-            src={loginFormJpg}
+            src={loginJpg}
             alt="Person working"
             className="w-full lg:min-h-[100vh]"
           />

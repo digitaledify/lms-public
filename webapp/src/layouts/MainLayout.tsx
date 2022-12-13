@@ -57,6 +57,9 @@ function MainLayout(props: MainLayoutProps) {
               </Link>
             </div>
           )}
+          <Link to='/logout' className="btn btn-sm btn-outline ease-linear transition-all duration-[0.5s] " onClick={auth.logout}>
+            Logout
+          </Link>
         </div>
       </div>
       <div className="min-h-screen">{props.children}</div>
