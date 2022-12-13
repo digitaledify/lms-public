@@ -3,6 +3,8 @@ import { useNavigate } from "@tanstack/react-location";
 import { createContext } from "react";
 import { deserialize } from "../lib/strings";
 import { User } from "../types/common";
+import {toast} from 'react-toastify'
+
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -51,6 +53,7 @@ function AuthProvider(props: AuthProviderProps) {
   const logout = () => {
     setToken(null);
     setUser(null);
+    toast('Successfully logged Out!',{type:'info'})
     navigate({
       to: "/login",
     });

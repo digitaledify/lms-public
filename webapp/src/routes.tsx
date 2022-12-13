@@ -8,7 +8,7 @@ import CreateCourse from "./pages/create-course";
 import Dashboard from "./pages/dashboard";
 import ManageCourse from "./pages/ManageCourse";
 import ManageCourses from "./pages/ManageCourses";
-import Login from "./components/LoginForm";
+import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 
 export type LocationGenerics = MakeGenerics<{
