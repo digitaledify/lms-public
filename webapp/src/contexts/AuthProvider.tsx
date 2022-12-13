@@ -1,57 +1,70 @@
+import { useLocalStorage } from "@mantine/hooks";
+import { useNavigate } from "@tanstack/react-location";
 import { createContext } from "react";
-import axios from "axios";
+import { deserialize } from "../lib/strings";
+import { User } from "../types/common";
 
-const baseURL = "https://lms-public.onrender.com/api";
-
-type User = {
-  username: string;
-  name?: string;
-  password: string;
-};
-
-type AuthContextProps = {
-  login: (user: User) => Promise<void>;
-  signup: (user: User) => Promise<void>;
-  logout: () => void;
-};
-
-type AuthProviderProps = {
+interface AuthProviderProps {
   children: React.ReactNode;
-};
+}
 
-export const AuthContext = createContext<AuthContextProps | null>(null);
+interface IAuthContext {
+  token: string | null;
+  user: User | null;
+  login: (token: string, user: User) => void;
+  logout: () => void;
+}
 
-function AuthProvider({ children }: AuthProviderProps) {
-  const login = async (user: User) => {
-    try {
-      const response = await axios.post(baseURL + "/login", { user });
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
+export const AuthContext = createContext<IAuthContext>({
+  token: null,
+  user: null,
+  login: () => {
+    return null;
+  },
+  logout: () => {
+    return null;
+  },
+});
+
+function AuthProvider(props: AuthProviderProps) {
+  const navigate = useNavigate();
+  const [token, setToken] = useLocalStorage<string | null>({
+    key: "token",
+    defaultValue: null,
+    deserialize,
+  });
+
+  const [user, setUser] = useLocalStorage<User | null>({
+    key: "user",
+    defaultValue: null,
+    deserialize,
+  });
+
+  const login = (token: string, user: User) => {
+    setToken(token);
+    setUser(user);
+    navigate({
+      to: "/",
+    });
   };
-    
-  const signup = async (user: User) => {
-    try {
-      const response = await axios.post(baseURL + "/register", { user });
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
+
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+    navigate({
+      to: "/login",
+    });
   };
-    
-    const logout = () => {
-        localStorage.removeItem("user");
-    }
+
+  const value: IAuthContext = {
+    token,
+    user,
+    login,
+    logout,
+  };
 
   return (
-    <AuthContext.Provider value={{ login, signup,logout }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
   );
 }
 

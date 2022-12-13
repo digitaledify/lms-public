@@ -11,14 +11,14 @@ const location = new ReactLocation<LocationGenerics>();
 function App() {
   return (
     <>
-      <AuthProvider>
-        <Router location={location} routes={routes}>
+      <Router location={location} routes={routes}>
+        <AuthProvider>
           <MainLayout>
             <Outlet />
           </MainLayout>
-        </Router>
-        <ToastContainer position="top-center" />
-      </AuthProvider>
+          <ToastContainer position="top-center" />
+        </AuthProvider>
+      </Router>
     </>
   );
 }

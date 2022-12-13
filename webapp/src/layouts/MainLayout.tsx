@@ -1,8 +1,14 @@
 import React from "react";
 import logoSrc from "../assets/logo.png";
-import { Link, useLocation, useRouter } from "@tanstack/react-location";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useRouter,
+} from "@tanstack/react-location";
 import TopBarLoader from "../components/TopBarLoader";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import useAuth from "../hooks/useAuth";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -11,7 +17,21 @@ type MainLayoutProps = {
 function MainLayout(props: MainLayoutProps) {
   const router = useRouter();
   const location = useLocation();
-  
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  if (
+    location.current.pathname.includes("login") ||
+    location.current.pathname.includes("signup")
+  ) {
+    return <>{props.children}</>;
+  }
+
+  if (!auth.token) {
+    navigate({
+      to: "/login",
+    });
+  }
 
   return (
     <div>

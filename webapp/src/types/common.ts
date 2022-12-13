@@ -15,4 +15,10 @@ export interface Student {
   email: string;
 }
 
+export interface User {
+  name: string;
+  username: string;
+id: number;
+}
+
 export type ModuleOrder = "up" | "down";

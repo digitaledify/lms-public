@@ -27,3 +27,11 @@ export const getFileNameFromBlobUrl = (blobUrl: string) => {
   const fileName = path.substring(path.lastIndexOf("/") + 1);
   return fileName;
 };
+
+export const deserialize = (value: string) => {
+  try {
+    return JSON.parse(value);
+  } catch (e) {
+    return value;
+  }
+};

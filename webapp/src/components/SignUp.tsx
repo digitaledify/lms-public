@@ -1,12 +1,12 @@
 import { useState } from "react";
 import loginFormJpg from "../assets/login-page-hero.jpg";
 import logoSrc from "../assets/logo.png";
-import axios from "axios";
 import { Link } from "@tanstack/react-location";
-
-const baseURL = "https://lms-public.onrender.com/api/auth";
+import axiosInstance from "../lib/http-client";
+import useAuth from "../hooks/useAuth";
 
 function SignUp() {
+  const auth = useAuth();
   const [user, setUser] = useState({ username: "", name: "", password: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,15 +18,13 @@ function SignUp() {
   ) => {
     e.preventDefault();
     try {
-      const response = await axios.post(baseURL + "/register", { ...user });
-
+      const response = await axiosInstance.post("/auth/register", { ...user });
+      auth.login(response.data.token, response.data.user);
       console.log(response.data);
       setUser({ username: "", name: "", password: "" });
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    
   };
 
   return (
@@ -56,7 +54,7 @@ function SignUp() {
                 name="username"
                 type="text"
                 placeholder="username"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 value={user.username}
                 onChange={handleChange}
               />
@@ -70,7 +68,7 @@ function SignUp() {
                 name="name"
                 type="text"
                 placeholder="name"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 value={user.name}
                 onChange={handleChange}
               />
@@ -84,17 +82,14 @@ function SignUp() {
                 name="password"
                 type="password"
                 placeholder="password"
-                className="input input-bordered"
+                className="input input-bordered rounded-none"
                 value={user.password}
                 onChange={handleChange}
               />
             </div>
 
             <div className="form-control mt-6">
-              <button
-                onClick={handleRegister}
-                className="btn btn-primary "
-              >
+              <button onClick={handleRegister} className="btn btn-primary ">
                 Register
               </button>
             </div>
@@ -102,7 +97,7 @@ function SignUp() {
             <p className="mt-6 text-center">
               Already have an account ?{" "}
               <span className=" font-semibold underline">
-                <Link to='/login'>Login</Link>
+                <Link to="/login">Login</Link>
               </span>
             </p>
           </div>
