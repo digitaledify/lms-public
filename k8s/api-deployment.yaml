@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: lms-public-api
+          image: lms-public-api-v1
           imagePullPolicy: Never
           ports:
             - containerPort: 3000
