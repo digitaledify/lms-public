@@ -6,7 +6,7 @@
   "private": "true",
   "scripts": {
     "lint": "eslint src/",
-    "start": "prisma migrate deploy && node build/src/index.js",
+    "start": "prisma migrate deploy && node build/index.js",
     "build": "tsc",
     "dev": "ts-node-dev --respawn --pretty --transpile-only --exit-child src/index.ts",
     "test": "echo \"Error: no test specified\"",
@@ -40,6 +40,7 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
+    "@types/express-jwt": "^7.4.2",
     "@types/formidable": "^2.0.5",
     "@types/http-errors": "^1.8.2",
     "@types/jsonwebtoken": "^8.5.9",
