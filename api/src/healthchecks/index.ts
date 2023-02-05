@@ -8,6 +8,7 @@ healthchecksRouter.get("/", (req, res) => {
     message: "success",
     mode: getConfig("MODE"),
     env: getConfig("NODE_ENV"),
+    version: '1.0.2'
   });
 });
 
