@@ -4,7 +4,7 @@ FROM node:latest as build
 WORKDIR /app
 # Install app dependencies
 COPY package*.json ./
-cd webapp && RUN npm install
+RUN npm install
 # Build app
 COPY . .
 RUN npm run build
