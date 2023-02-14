@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Building Docker image') {
             steps {
-                echo 'Hello World'
+                sh 'cd webapp && docker build -f Dockerfile -t img-frontend .'
             }
         }
     }
