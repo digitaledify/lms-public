@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lms-public-ingres
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        # - lms.konastack.com
+      secretName: tls-certificate
+  rules:
+    - http:
+        paths:
+          - path: /api(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: lms-public-backend
+                port:
+                  number: 80
+          - path: /(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: lms-public-frontend
+                port:
+                  number: 80

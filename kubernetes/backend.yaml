@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lms-public-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lms-public-backend
+  template:
+    metadata:
+      labels:
+        app: lms-public-backend
+    spec:
+      containers:
+        - name: lms-public-backend
+          image: dlacrtmp.azurecr.io/lms-public-backend:2.0.0
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: backend-config-map
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lms-public-backend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: lms-public-backend
