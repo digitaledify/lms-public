@@ -3,7 +3,7 @@
 # Instructions
 # Execute this script as root user
 # chmod +x install-docker.sh
-# sudo ./install-docker.sh
+# ./install-docker.sh
 
 # Install Docker
 
