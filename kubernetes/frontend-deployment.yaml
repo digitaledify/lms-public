@@ -20,15 +20,3 @@ spec:
           env:
             - name: VITE_API_URL
               value: "http://20.204.207.156/api"
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: lms-public-frontend
-spec:
-  type: ClusterIP
-  ports:
-    - port: 80
-  selector:
-    app: lms-public-frontend

@@ -26,16 +26,3 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: password
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: lms-public-backend
-spec:
-  type: ClusterIP
-  ports:
-    - port: 80
-      targetPort: 8080
-  selector:
-    app: lms-public-backend
