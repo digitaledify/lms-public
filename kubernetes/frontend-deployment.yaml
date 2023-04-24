@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: lms-public-frontend-container-label
-          image: dlacrtmp.azurecr.io/lms-public-frontend:2.0.0
+          image: lms-public-fe
+          imagePullPolicy: Never
           ports:
             - containerPort: 80
           env:
