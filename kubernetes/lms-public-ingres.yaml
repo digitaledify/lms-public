@@ -9,7 +9,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        # - lms.konastack.com
+        - lms.konastack.com
       secretName: tls-certificate
   rules:
     - http:
