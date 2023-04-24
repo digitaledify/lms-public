@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lms-public-backend
+  name: lms-public-backend-service
 spec:
   type: ClusterIP
   ports:

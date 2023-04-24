@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lms-public-frontend
+  name: lms-public-frontend-deployment
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,7 @@ spec:
         app: lms-public-frontend
     spec:
       containers:
-        - name: lms-public-frontend
+        - name: lms-public-frontend-container-label
           image: dlacrtmp.azurecr.io/lms-public-frontend:2.0.0
           ports:
             - containerPort: 80

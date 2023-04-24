@@ -18,13 +18,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: lms-public-backend
+                name: lms-public-backend-service
                 port:
                   number: 80
           - path: /(.*)
             pathType: Prefix
             backend:
               service:
-                name: lms-public-frontend
+                name: lms-public-frontend-service
                 port:
                   number: 80
