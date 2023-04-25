@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export function buildURL(location: string, params?: Record<string, string>) {
   const url = new URL(location);
 
@@ -14,11 +16,8 @@ export function buildURL(location: string, params?: Record<string, string>) {
 }
 
 export function isUrlValid(text: string) {
-  const res = text.match(
-    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
-  );
-  if (res == null) return false;
-  else return true;
+  const res = z.string().url().safeParse(text);
+  return res.success;
 }
 
 export const getFileNameFromBlobUrl = (blobUrl: string) => {
