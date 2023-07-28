@@ -31,7 +31,8 @@ jobs:
       with:
         push: true
         tags: digitallyncaicr.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_203dee23a750461b85a53092cfdad76d }}/lms-public-api-auth:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./api/Dockerfile
+        context: ./api
 
   deploy:
     runs-on: ubuntu-latest
