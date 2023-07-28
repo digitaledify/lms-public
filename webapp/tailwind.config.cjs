@@ -10,15 +10,6 @@ module.exports = {
     require("daisyui"),
   ],
   daisyui: {
-    // themes: [
-    //   {
-    //     light: {
-    //       // eslint-disable-next-line @typescript-eslint/no-var-requires
-    //       ...require("daisyui/src/colors/themes")["[data-theme=corporate]"],
-    //       primary: "#F4B400",
-    //       "primary-focus": "#ffc31a",
-    //     },
-    //   },
-    // ],
+    darkTheme: "light",
   },
 };
